@@ -1,0 +1,33 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Wed Nov  4 01:20:02 2026
+[*]
+[dumpfile] "/mnt/c/dev/controlador-de-trafego-CL/wave.vcd"
+[dumpfile_mtime] "Wed Nov  4 01:05:52 2026"
+[dumpfile_size] 3333
+[savefile] "/mnt/c/dev/controlador-de-trafego-CL/out/save.gtkw"
+[timestart] 0
+[size] 1920 973
+[pos] -27 -24
+*-26.004961 10100000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_semaforo.
+[treeopen] tb_semaforo.uut.
+[sst_width] 297
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 287
+@28
+tb_semaforo.ena
+tb_semaforo.clk
+tb_semaforo.clrn
+tb_semaforo.vermelho_a
+tb_semaforo.amarelo_a
+@29
+tb_semaforo.verde_a
+@28
+tb_semaforo.vermelho_b
+tb_semaforo.amarelo_b
+tb_semaforo.verde_b
+tb_semaforo.uut.estados.q[1:0]
+[pattern_trace] 1
+[pattern_trace] 0
