@@ -6,6 +6,8 @@ entity maq_4estados is
      clk : in STD_LOGIC;
      clrn: in STD_LOGIC;
      ena: in STD_LOGIC;
+     sensor_a : in STD_LOGIC;
+     sensor_b : in STD_LOGIC;
      q : out STD_LOGIC_VECTOR(1 downto 0)
    );
 end maq_4estados;
@@ -22,9 +24,21 @@ begin
         elsif rising_edge(clk) then
             if ena = '1' then
                 case estado is
-                    when "00" => estado <= "01";
+                    -- Keep the current green phase while only its lane has
+                    -- traffic. Otherwise, follow the normal sequence.
+                    when "00" =>
+                        if sensor_a = '1' and sensor_b = '0' then
+                            estado <= "00";
+                        else
+                            estado <= "01";
+                        end if;
                     when "01" => estado <= "10";
-                    when "10" => estado <= "11";
+                    when "10" =>
+                        if sensor_b = '1' and sensor_a = '0' then
+                            estado <= "10";
+                        else
+                            estado <= "11";
+                        end if;
                     when others => estado <= "00";
                 end case;
             end if;

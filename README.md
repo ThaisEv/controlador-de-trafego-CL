@@ -5,9 +5,19 @@
 
 Projeto desenvolvido para simulação de um sistema digital de controle de tráfego utilizando VHDL, organizado em módulos estruturados e validado por meio de um *testbench*.
 
-O módulo principal disponibiliza dois conjuntos independentes de sinais:
+O módulo principal recebe os sensores `sensor_a` e `sensor_b`, ativos em nível
+alto quando há veículo na respectiva via, e disponibiliza dois conjuntos independentes de sinais:
 `vermelho_a`, `amarelo_a`, `verde_a` e `vermelho_b`, `amarelo_b`, `verde_b`,
 um para cada via.
+
+O comportamento é:
+
+| Sensores | Comportamento |
+| --- | --- |
+| Nenhum veículo | Alternância normal dos semáforos |
+| Apenas `sensor_a` ativo | Prioridade para a Via A, mantendo seu verde quando possível |
+| Apenas `sensor_b` ativo | Prioridade para a Via B, mantendo seu verde quando possível |
+| Ambos ativos | Alternância normal dos semáforos |
 
 ---
 
@@ -68,7 +78,7 @@ ghdl -e tb_semaforo
 Rode a simulação gerando o arquivo `wave.vcd` contendo o histórico de transição dos sinais:
 
 ```bash
-ghdl -r tb_semaforo --vcd=wave.vcd --stop-time=500ns
+ghdl -r tb_semaforo --vcd=wave.vcd --stop-time=1200ns
 
 ```
 

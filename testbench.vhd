@@ -12,6 +12,8 @@ architecture behavior of tb_semaforo is
          clk : in STD_LOGIC;
          clrn : in STD_LOGIC;
          ena : in STD_LOGIC;
+         sensor_a : in STD_LOGIC;
+         sensor_b : in STD_LOGIC;
          vermelho_a : out STD_LOGIC;
          amarelo_a : out STD_LOGIC;
          verde_a : out STD_LOGIC;
@@ -25,6 +27,8 @@ architecture behavior of tb_semaforo is
    signal clk : STD_LOGIC := '0';
    signal clrn : STD_LOGIC := '0';
    signal ena : STD_LOGIC := '0';
+   signal sensor_a : STD_LOGIC := '0';
+   signal sensor_b : STD_LOGIC := '0';
 
  	--Outputs
    signal vermelho_a : STD_LOGIC;
@@ -40,6 +44,8 @@ begin
           clk => clk,
           clrn => clrn,
           ena => ena,
+          sensor_a => sensor_a,
+          sensor_b => sensor_b,
           vermelho_a => vermelho_a,
           amarelo_a => amarelo_a,
           verde_a => verde_a,
@@ -64,9 +70,23 @@ begin
       wait for 100 ns;	
       clrn <= '1';
       ena <= '1';
-      wait for 100 ns;
-      
-      wait for 500 ns;
+
+      -- No sensors: the controller alternates normally.
+      wait for 160 ns;
+
+      -- Only A has a vehicle: A remains green at the next decision points.
+      sensor_a <= '1';
+      wait for 160 ns;
+
+      -- Only B has a vehicle: B receives priority after the yellow phase.
+      sensor_a <= '0';
+      sensor_b <= '1';
+      wait for 320 ns;
+
+      -- Both lanes occupied: return to normal alternation.
+      sensor_a <= '1';
+      wait for 320 ns;
+      wait;
    end process;
 
 end behavior;

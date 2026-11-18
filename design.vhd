@@ -7,6 +7,8 @@ entity semaforo is
         clk : in STD_LOGIC;
         clrn : in STD_LOGIC;
         ena : in STD_LOGIC;
+        sensor_a : in STD_LOGIC;
+        sensor_b : in STD_LOGIC;
         vermelho_a : out STD_LOGIC;
         amarelo_a : out STD_LOGIC;
         verde_a : out STD_LOGIC;
@@ -39,6 +41,8 @@ begin
             clk => clk,
             clrn => clrn,
             ena => ena_estado,
+            sensor_a => sensor_a,
+            sensor_b => sensor_b,
             q => q
         );
 
